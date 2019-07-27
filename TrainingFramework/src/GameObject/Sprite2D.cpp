@@ -17,6 +17,11 @@ void Sprite2D::CaculateWorldMatrix()
 	m_WorldMat = m_Sc*m_T;
 }
 
+Sprite2D::Sprite2D()
+{
+
+}
+
 Sprite2D::Sprite2D(Models * model, Shaders * shader, Texture * texture)
 	: BaseObject()
 {

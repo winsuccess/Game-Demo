@@ -25,19 +25,15 @@ void Application::Init()
 	Models *m_model;
 	Camera *m_Camera;
 
-	//button
+	//Start Button
 	m_Shaders = new Shaders();
 	m_Shaders->Init("..\\Data\\Shaders\\TextureShader.vs", "..\\Data\\Shaders\\TextureShader.fs");
-
 	m_texture = new Texture();
-	m_texture->Init("..\\Data\\Textures\\btPlay.tga", GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);
-
-	m_model = new Models();
-	m_model->Init("..\\Data\\Model\\Sprite2D.nfg", NFG);
-
-	m_Sprite2D = new Sprite2D(m_model,m_Shaders,m_texture);
-	m_Sprite2D->Set2DPosition(100, 50);
-	m_Sprite2D->Init();
+	m_texture->Init("..\\Data\\Textures\\sgbutton.tga", GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);
+	m_Button = new Button(m_Shaders,m_texture);
+	m_Button->Set2DPosition(320, 50);
+	m_Button->SetSize(400, 100);
+	m_Button->Init();
 
 
 	//camera
@@ -93,7 +89,7 @@ void Application::Update(GLfloat deltaTime)
 	//update
 	m_Plan->Update(deltaTime);
 	m_Sprite3D->Update(deltaTime);
-	m_Sprite2D->Update(deltaTime);
+	m_Button->Update(deltaTime);
 	m_Sphere->Update(deltaTime);
 }
 
@@ -108,7 +104,7 @@ void Application::Render()
 	m_Sphere->Draw();
 	
 	//2D
-	m_Sprite2D->Draw();
+	m_Button->Draw();
 }
 
 void Application::HandleKeyEvent(unsigned char key, bool bIsPresseded)

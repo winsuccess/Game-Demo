@@ -12,6 +12,7 @@ private:
 	void			CaculateWorldMatrix();
 
 public:
+	Sprite2D();
 	Sprite2D(Models* model, Shaders* shader, Texture * texture);
 	Sprite2D(Models* model, Shaders* shader, Vector4 color);
 	~Sprite2D();

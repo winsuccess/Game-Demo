@@ -5,6 +5,7 @@
 #include "Sprite2D.h"
 #include "Sprite3D.h"
 #include "Sphere.h"
+#include "Button.h"
 
 class Application : public CSingleton<Application>
 {
@@ -24,6 +25,7 @@ private:
 	Sprite3D *	m_Plan;
 	Sprite3D *	m_Sprite3D;
 	Sphere * m_Sphere;
+	Button* m_Button;
 
 };
 
