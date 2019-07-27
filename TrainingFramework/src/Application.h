@@ -4,7 +4,8 @@
 
 #include "Sprite2D.h"
 #include "Sprite3D.h"
-#include "..//Sphere.h"
+#include "Sphere.h"
+
 class Application : public CSingleton<Application>
 {
 public:
