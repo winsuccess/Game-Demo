@@ -1,0 +1,8 @@
+﻿  cl : Command line warning D9035 : option 'Gm' has been deprecated and will be removed in a future release
+  Application.cpp
+  Generating Code...
+  TrainingFramework.cpp
+  Sprite3D.cpp
+D:\Gameloft Documents\Programming\TrainingFramework\src\Application.cpp(84,50): warning C4305:  'argument': truncation from 'double' to 'GLfloat'
+D:\Gameloft Documents\Programming\TrainingFramework\src\Application.cpp(84,50): warning C4305: Skipping... (no relevant changes detected)
+  TrainingFramework.vcxproj -> D:\Gameloft Documents\Programming\\BIN-Nvidia\TrainingFramework.exe
