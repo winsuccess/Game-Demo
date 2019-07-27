@@ -60,6 +60,7 @@ void Application::Init()
 	m_Plan->Set3DScale(Vector3(20, 20, 20));
 	m_Plan->Init();
 
+
 	//box
 	m_model = new Models();
 	m_model->Init("..\\Data\\Model\\box.nfg", NFG);
@@ -71,17 +72,16 @@ void Application::Init()
 	m_Sprite3D->Init();
 
 
-	//cirle
-	m_model = new Models();
-	m_model->Init("..\\Data\\Model\\Bila.nfg", NFG);
+	//sphere
+
 	m_Shaders = new Shaders();
 	m_Shaders->Init("..\\Data\\Shaders\\TextureShader.vs", "..\\Data\\Shaders\\TextureShader.fs");
 	m_texture = new Texture();
 	m_texture->Init("..\\Data\\Textures\\Rock.tga", GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);
 
-	m_Sprite3D1 = new Sprite3D(m_model, m_Shaders, m_Camera, m_texture);
-	m_Sprite3D1->Init();
-	m_Sprite3D1->Set3DScale(Vector3(0.05, 0.05, 0.05));
+	m_Sphere = new Sphere(m_Shaders, m_Camera, m_texture);
+	m_Sphere->Init();
+	m_Sphere->Set3DScale(Vector3(0.1, 0.1, 0.1));
 	/*m_Sprite3D1->SetShaders(m_Shaders);
 	m_Sprite3D1->SetModels(m_model);
 	m_Sprite3D1->SetColor(Vector4(0.0, 1.0, 1.0, 0.5));
@@ -94,7 +94,7 @@ void Application::Update(GLfloat deltaTime)
 	m_Plan->Update(deltaTime);
 	m_Sprite3D->Update(deltaTime);
 	m_Sprite2D->Update(deltaTime);
-	m_Sprite3D1->Update(deltaTime);
+	m_Sphere->Update(deltaTime);
 }
 
 void Application::Render()
@@ -105,7 +105,7 @@ void Application::Render()
 	//3D
 	m_Plan->Draw();
 	m_Sprite3D->Draw();
-	m_Sprite3D1->Draw();
+	m_Sphere->Draw();
 	
 	//2D
 	m_Sprite2D->Draw();
