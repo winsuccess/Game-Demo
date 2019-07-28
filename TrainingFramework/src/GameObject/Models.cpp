@@ -1,6 +1,10 @@
 #include "Models.h"
 #include "utilities.h" 
 
+Models::Models()
+{
+
+}
 
 void Models::Filter(unsigned char * pBuffer, GLint range)
 {

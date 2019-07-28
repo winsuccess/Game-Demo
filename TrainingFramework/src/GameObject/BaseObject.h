@@ -1,12 +1,11 @@
 #pragma once
 #include "utilities.h" 
 #include <memory>
+#include "Shaders.h"
+#include "Models.h"
+#include "Camera.h"
+#include "Texture.h"
 
-
-class Shaders;
-class Models;
-class Texture;
-class Camera;
 class BaseObject
 {
 
@@ -21,11 +20,12 @@ protected:
 	Vector4			m_Color;
 
 	Matrix			m_WorldMat;
+	
+	std::unique_ptr<Models> m_pModel{ new Models() };
+	std::unique_ptr<Shaders> m_pShader{ new Shaders() };
+	std::shared_ptr<Camera> m_pCamera{ new Camera() };
+	std::unique_ptr<Texture> m_pTexture{ new Texture() };
 
-	Models			*m_pModel;
-	Shaders			*m_pShader;
-	Camera			*m_pCamera;
-	Texture			*m_pTexture;
 public:
 	BaseObject() {
 		m_Id = 0;
@@ -57,13 +57,13 @@ public:
 
 	void			SetColor(Vector4 color) { m_Color = color; }
 
-	void			SetCamera(Camera *cam) { m_pCamera = cam; }
+	void			SetCamera(std::unique_ptr<Camera> cam) { m_pCamera = std::move(cam); }
 
-	void			SetModels(Models* mod) { m_pModel = mod; }
+	void			SetModels(std::unique_ptr<Models> mod) { m_pModel = std::move(mod); }
 
-	void			SetShaders(Shaders* sha) { m_pShader = sha; }
+	void			SetShaders(std::unique_ptr<Shaders> sha) { m_pShader = std::move(sha); }
 
-	void			SetTexture(Texture* tex) { m_pTexture = tex; }
+	void			SetTexture(std::unique_ptr<Texture> tex) { m_pTexture = std::move(tex); }
 
 };
 

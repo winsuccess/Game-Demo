@@ -16,7 +16,7 @@ void operator delete[] (void * p, char * fileName, unsigned long line);
 #else
 #define DEBUG_NEW new
 #endif
-#define new DEBUG_NEW
+//#define new DEBUG_NEW
 
 //malloc section
 void * CustomAlloc(size_t noBytes);

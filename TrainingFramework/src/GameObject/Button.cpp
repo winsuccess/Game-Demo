@@ -4,24 +4,29 @@
 #include "Camera.h"
 #include "Texture.h"
 
-Button::Button(Shaders* shader, Texture* texture)
+Button::Button()
 {
-	Models* model = new Models();
+
+}
+
+Button::Button(std::unique_ptr<Shaders> shader, std::unique_ptr<Texture> texture)
+{
+	std::unique_ptr<Models> model(new Models());
 	model->Init("..\\Data\\Model\\rectangle.nfg", NFG);
-	m_pModel = model;
-	m_pShader = shader;
+	m_pModel = std::move(model);
+	m_pShader = std::move(shader);
+	m_pTexture = std::move(texture);
 	m_pCamera = nullptr;
-	m_pTexture = texture;
 
 	m_Vec3Position = Vector3(0, 0, 0);
 }
 
-Button::Button(Shaders* shader, Vector4 color)
+Button::Button(std::unique_ptr<Shaders> shader, Vector4 color)
 {
-	Models* model = new Models();
+	std::unique_ptr<Models> model(new Models());
 	model->Init("..\\Data\\Model\\rectangle.nfg", NFG);
-	m_pModel = model;
-	m_pShader = shader;
+	m_pModel = std::move(model);
+	m_pShader = std::move(shader);
 	m_pCamera = nullptr;
 	m_pTexture = nullptr;
 	m_Color = color;

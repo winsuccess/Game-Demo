@@ -4,7 +4,8 @@
 class Button : public Sprite2D
 {
 public:
-	Button(Shaders* shader, Texture* texture);
-	Button(Shaders* shader, Vector4 color);
+	Button();
+	Button (std::unique_ptr<Shaders> shader, std::unique_ptr<Texture> texture);
+	Button(std::unique_ptr<Shaders> shader, Vector4 color);
 	~Button();
 };

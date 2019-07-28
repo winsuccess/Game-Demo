@@ -1,7 +1,7 @@
 #pragma once
+#include <memory>
 #include "Singleton.h"
 #include "GameConfig.h"
-
 #include "Sprite2D.h"
 #include "Sprite3D.h"
 #include "Sphere.h"
@@ -21,11 +21,11 @@ public:
 
 private:
 	
-	Sprite2D *	m_Sprite2D;
-	Sprite3D *	m_Plan;
-	Sprite3D *	m_Sprite3D;
-	Sphere * m_Sphere;
-	Button* m_Button;
+	std::unique_ptr<Sprite2D>	m_Sprite2D;
+	std::unique_ptr<Sprite3D>	m_Plan;
+	std::unique_ptr<Sprite3D>	m_Sprite3D;
+	std::unique_ptr<Sphere> m_Sphere;
+	std::unique_ptr<Button> m_Button;
 
 };
 

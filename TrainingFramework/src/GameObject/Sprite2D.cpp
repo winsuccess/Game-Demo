@@ -22,13 +22,13 @@ Sprite2D::Sprite2D()
 
 }
 
-Sprite2D::Sprite2D(Models * model, Shaders * shader, Texture * texture)
+Sprite2D::Sprite2D(std::unique_ptr<Models> model, std::unique_ptr<Shaders> shader, std::unique_ptr<Texture> texture)
 	: BaseObject()
 {
-	m_pModel = model;
-	m_pShader = shader;
+	m_pModel = std::move(model);
+	m_pShader = std::move(shader);
 	m_pCamera = nullptr;
-	m_pTexture = texture;
+	m_pTexture = std::move(texture);
 
 	m_Vec3Position = Vector3(0, 0, 0);
 	m_iHeight = 50;
@@ -36,11 +36,11 @@ Sprite2D::Sprite2D(Models * model, Shaders * shader, Texture * texture)
 	m_Vec3Scale = Vector3((float)m_iWidth/screenWidth, (float)m_iHeight/screenHeight, 1);
 }
 
-Sprite2D::Sprite2D(Models * model, Shaders * shader, Vector4 color)
+Sprite2D::Sprite2D(std::unique_ptr<Models> model, std::unique_ptr<Shaders> shader, Vector4 color)
 	: BaseObject()
 {
-	m_pModel = model;
-	m_pShader = shader;
+	m_pModel = std::move(model);
+	m_pShader = std::move(shader);
 	m_pCamera = nullptr;
 	m_pTexture = nullptr;
 	m_Color = color;

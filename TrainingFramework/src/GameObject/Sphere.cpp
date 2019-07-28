@@ -4,22 +4,27 @@
 #include "Models.h"
 #include "Texture.h"
 
-Sphere::Sphere( Shaders* shader, Camera* camera, Texture* texture) : Sprite3D()
+Sphere::Sphere()
 {
-	Models* model = new Models();
-	model->Init("..\\Data\\Model\\Bila.nfg", NFG);
-	m_pModel = model;
-	m_pShader = shader;
-	m_pCamera = camera;
-	m_pTexture = texture;
+
 }
 
-Sphere::Sphere(Shaders* shader, Camera* camera, Vector4 color) : Sprite3D()
+Sphere::Sphere(std::unique_ptr<Shaders> shader, std::shared_ptr<Camera> camera, std::unique_ptr<Texture> texture) : Sprite3D()
 {
-	Models* model = new Models();
+	std::unique_ptr<Models> model(new Models());
 	model->Init("..\\Data\\Model\\Bila.nfg", NFG);
-	m_pModel = model;
-	m_pShader = shader;
+	m_pModel = std::move(model);
+	m_pShader = std::move(shader);
+	m_pCamera = camera;
+	m_pTexture = std::move(texture);
+}
+
+Sphere::Sphere(std::unique_ptr<Shaders> shader, std::shared_ptr<Camera> camera, Vector4 color) : Sprite3D()
+{
+	std::unique_ptr<Models> model(new Models());
+	model->Init("..\\Data\\Model\\Bila.nfg", NFG);
+	m_pModel = std::move(model);
+	m_pShader = std::move(shader);
 	m_pCamera = camera;
 	m_pTexture = nullptr;
 	m_Color = color;

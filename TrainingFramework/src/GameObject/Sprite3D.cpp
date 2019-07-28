@@ -20,24 +20,24 @@ void Sprite3D::CaculateWorldMatrix()
 	m_WorldMat = m_Sc*m_Rz*m_Rx*m_Ry*m_T;
 }
 
-Sprite3D::Sprite3D(Models * model, Shaders * shader, Camera* camera, Texture * texture)
+Sprite3D::Sprite3D(std::unique_ptr<Models> model, std::unique_ptr<Shaders> shader, std::shared_ptr<Camera> camera, std::unique_ptr<Texture> texture)
 	: BaseObject()
 {
-	m_pModel = model;
-	m_pShader = shader;
+	m_pModel = std::move(model);
+	m_pShader = std::move(shader);
 	m_pCamera = camera;
-	m_pTexture = texture;
+	m_pTexture = std::move(texture);
 }
 
 Sprite3D::Sprite3D()
 {
 }
 
-Sprite3D::Sprite3D(Models * model, Shaders * shader, Camera* camera, Vector4 color)
+Sprite3D::Sprite3D(std::unique_ptr<Models> model, std::unique_ptr<Shaders> shader, std::shared_ptr<Camera> camera, Vector4 color)
 	: BaseObject()
 {
-	m_pModel = model;
-	m_pShader = shader;
+	m_pModel = std::move(model);
+	m_pShader = std::move(shader);
 	m_pCamera = camera;
 	m_pTexture = nullptr;
 	m_Color = color;

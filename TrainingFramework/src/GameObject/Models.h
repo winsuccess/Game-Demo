@@ -10,6 +10,7 @@ private:
 	GLuint		m_iIboID;
 	void		Filter(unsigned char * pBuffer, GLint range);
 public:
+	Models();
 	int			Init(const char *szFileName, GLuint type);
 	int			Init(GLuint type);
 	GLuint		GetVertexObject();

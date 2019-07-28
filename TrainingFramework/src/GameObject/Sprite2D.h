@@ -13,8 +13,8 @@ private:
 
 public:
 	Sprite2D();
-	Sprite2D(Models* model, Shaders* shader, Texture * texture);
-	Sprite2D(Models* model, Shaders* shader, Vector4 color);
+	Sprite2D(std::unique_ptr<Models> model, std::unique_ptr<Shaders> shader, std::unique_ptr<Texture> texture);
+	Sprite2D(std::unique_ptr<Models> model, std::unique_ptr<Shaders> shader, Vector4 color);
 	~Sprite2D();
 
 	void		Init() override;

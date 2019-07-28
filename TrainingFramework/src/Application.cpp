@@ -20,17 +20,15 @@ void Application::Init()
 {
 	glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 
-	Shaders *m_Shaders;
-	Texture *m_texture;
-	Models *m_model;
-	Camera *m_Camera;
+	std::unique_ptr<Shaders> m_Shaders (new Shaders());
+	std::unique_ptr<Texture> m_texture(new Texture());;
+	std::unique_ptr<Models> m_model (new Models());;
+	std::shared_ptr<Camera> m_Camera(new Camera());;
 
 	//Start Button
-	m_Shaders = new Shaders();
 	m_Shaders->Init("..\\Data\\Shaders\\TextureShader.vs", "..\\Data\\Shaders\\TextureShader.fs");
-	m_texture = new Texture();
 	m_texture->Init("..\\Data\\Textures\\sgbutton.tga", GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);
-	m_Button = new Button(m_Shaders,m_texture);
+	m_Button = std::unique_ptr<Button>(new Button(std::move(m_Shaders),std::move(m_texture)));
 	m_Button->Set2DPosition(320, 50);
 	m_Button->SetSize(400, 100);
 	m_Button->Init();
@@ -40,56 +38,53 @@ void Application::Init()
 	Vector3 CameraPos(10, 40, 40);
 	Vector3 TargetPos(0, 0, 0);
 	float fFovY = 0.7f;
-	m_Camera = new Camera();
 	m_Camera->Init(CameraPos, TargetPos, fFovY, (GLfloat)screenWidth / screenHeight, 1.0f, 5000.0f, 1.0f);
 
 
 	//plan
-	m_model = new Models();
-	m_model->Init("..\\Data\\Model\\Plan.nfg", NFG);
-	m_Shaders = new Shaders();
-	m_Shaders->Init("..\\Data\\Shaders\\ColorShader.vs", "..\\Data\\Shaders\\TextureShader.fs");
-	m_texture = new Texture();
-	m_texture->Init("..\\Data\\Textures\\Dirt.tga", GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);
+	m_model.reset(new Models());
+	m_Shaders.reset(new Shaders());
+	m_texture.reset(new Texture());
 
-	m_Plan = new Sprite3D(m_model, m_Shaders, m_Camera, m_texture);
+	m_model->Init("..\\Data\\Model\\Plan.nfg", NFG);
+	m_Shaders->Init("..\\Data\\Shaders\\ColorShader.vs", "..\\Data\\Shaders\\TextureShader.fs");
+	m_texture->Init("..\\Data\\Textures\\Dirt.tga", GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);
+	m_Plan = std::unique_ptr<Sprite3D>(new Sprite3D(std::move(m_model), std::move(m_Shaders), m_Camera, std::move(m_texture)));
 	m_Plan->Set3DScale(Vector3(20, 20, 20));
 	m_Plan->Init();
 
 
 	//box
-	m_model = new Models();
-	m_model->Init("..\\Data\\Model\\box.nfg", NFG);
-	m_Shaders = new Shaders();
-	m_Shaders->Init("..\\Data\\Shaders\\ColorShader.vs", "..\\Data\\Shaders\\ColorShader.fs");
+	m_model.reset(new Models());
+	m_Shaders.reset(new Shaders());
+	m_texture.reset(new Texture());
 
-	m_Sprite3D = new Sprite3D(m_model, m_Shaders, m_Camera, Vector4(0.0, 0.0, 1.0, 0.5));
+	m_model->Init("..\\Data\\Model\\box.nfg", NFG);
+	m_Shaders->Init("..\\Data\\Shaders\\ColorShader.vs", "..\\Data\\Shaders\\ColorShader.fs");
+	m_Sprite3D = std::unique_ptr<Sprite3D>(new Sprite3D(std::move(m_model), std::move(m_Shaders), m_Camera, Vector4(0.0, 0.0, 1.0, 0.5)));
 	m_Sprite3D->Set3DScale(Vector3(1, 1, 1));
 	m_Sprite3D->Init();
 
 
 	//sphere
+	m_model.reset(new Models());
+	m_Shaders.reset(new Shaders());
+	m_texture.reset(new Texture());
 
-	m_Shaders = new Shaders();
 	m_Shaders->Init("..\\Data\\Shaders\\TextureShader.vs", "..\\Data\\Shaders\\TextureShader.fs");
-	m_texture = new Texture();
 	m_texture->Init("..\\Data\\Textures\\Rock.tga", GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);
-
-	m_Sphere = new Sphere(m_Shaders, m_Camera, m_texture);
+	m_Sphere = std::unique_ptr<Sphere>(new Sphere(std::move(m_Shaders), m_Camera, std::move(m_texture)) );
 	m_Sphere->Init();
 	m_Sphere->Set3DScale(Vector3(0.1, 0.1, 0.1));
-	/*m_Sprite3D1->SetShaders(m_Shaders);
-	m_Sprite3D1->SetModels(m_model);
-	m_Sprite3D1->SetColor(Vector4(0.0, 1.0, 1.0, 0.5));
-	m_Sprite3D1->SetCamera(m_Camera);*/
+
 }
 
 void Application::Update(GLfloat deltaTime)
 {
 	//update
+	m_Button->Update(deltaTime);
 	m_Plan->Update(deltaTime);
 	m_Sprite3D->Update(deltaTime);
-	m_Button->Update(deltaTime);
 	m_Sphere->Update(deltaTime);
 }
 

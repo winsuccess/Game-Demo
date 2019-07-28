@@ -9,8 +9,8 @@ private:
 
 public:
 	Sprite3D();
-	Sprite3D(Models* model, Shaders* shader, Camera* camera, Texture * texture);
-	Sprite3D(Models* model, Shaders* shader, Camera* camera, Vector4 color);
+	Sprite3D(std::unique_ptr<Models> model, std::unique_ptr<Shaders> shader, std::shared_ptr<Camera> camera, std::unique_ptr<Texture> texture);
+	Sprite3D(std::unique_ptr<Models> model, std::unique_ptr<Shaders> shader, std::shared_ptr<Camera> camera, Vector4 color);
 	~Sprite3D();
 
 	void		Init() override;
