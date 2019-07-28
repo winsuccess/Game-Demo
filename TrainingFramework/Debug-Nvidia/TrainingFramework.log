@@ -1,16 +1,7 @@
 ﻿  cl : Command line warning D9035 : option 'Gm' has been deprecated and will be removed in a future release
-  Sprite3D.cpp
-  Sphere.cpp
-  Generating Code...
-  Compiling...
-  TrainingFramework.cpp
-  Sprite2D.cpp
-D:\Gameloft Documents\Game Demo\TrainingFramework\src\GameObject\Sprite2D.cpp(148,11): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Gameloft Documents\Game Demo\TrainingFramework\src\GameObject\Sprite2D.cpp(149,11): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Gameloft Documents\Game Demo\TrainingFramework\src\GameObject\Sprite2D.cpp(159,11): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
-  Button.cpp
   Application.cpp
-D:\Gameloft Documents\Game Demo\TrainingFramework\src\GameObject\Sprite2D.cpp(160,11): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
-  Generating Code...
-D:\Gameloft Documents\Game Demo\TrainingFramework\src\Application.cpp(78,44): warning C4305:  'argument': truncation from 'double' to 'GLfloat'
+D:\Gameloft Documents\Game Demo\TrainingFramework\src\Application.cpp(75,48): warning C4305:  'argument': truncation from 'double' to 'GLfloat'
+D:\Gameloft Documents\Game Demo\TrainingFramework\src\Application.cpp(86,48): warning C4305:  'argument': truncation from 'double' to 'GLfloat'
+D:\Gameloft Documents\Game Demo\TrainingFramework\src\Application.cpp(97,48): warning C4305:  'argument': truncation from 'double' to 'GLfloat'
+D:\Gameloft Documents\Game Demo\TrainingFramework\src\Application.cpp(108,48): warning C4305:  'argument': truncation from 'double' to 'GLfloat'
   TrainingFramework.vcxproj -> D:\Gameloft Documents\Game Demo\\BIN-Nvidia\TrainingFramework.exe

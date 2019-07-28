@@ -12,7 +12,7 @@ Button::Button()
 Button::Button(std::unique_ptr<Shaders> shader, std::unique_ptr<Texture> texture)
 {
 	std::unique_ptr<Models> model(new Models());
-	model->Init("..\\Data\\Model\\rectangle.nfg", NFG);
+	model->Init("..\\Data\\Model\\Rectangle.nfg", NFG);
 	m_pModel = std::move(model);
 	m_pShader = std::move(shader);
 	m_pTexture = std::move(texture);
@@ -24,7 +24,7 @@ Button::Button(std::unique_ptr<Shaders> shader, std::unique_ptr<Texture> texture
 Button::Button(std::unique_ptr<Shaders> shader, Vector4 color)
 {
 	std::unique_ptr<Models> model(new Models());
-	model->Init("..\\Data\\Model\\rectangle.nfg", NFG);
+	model->Init("..\\Data\\Model\\Rectangle.nfg", NFG);
 	m_pModel = std::move(model);
 	m_pShader = std::move(shader);
 	m_pCamera = nullptr;

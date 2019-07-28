@@ -20,15 +20,15 @@ void Application::Init()
 {
 	glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 
-	std::unique_ptr<Shaders> m_Shaders (new Shaders());
+	std::unique_ptr<Shaders> m_Shaders(new Shaders());
 	std::unique_ptr<Texture> m_texture(new Texture());;
-	std::unique_ptr<Models> m_model (new Models());;
+	std::unique_ptr<Models> m_model(new Models());;
 	std::shared_ptr<Camera> m_Camera(new Camera());;
 
 	//Start Button
 	m_Shaders->Init("..\\Data\\Shaders\\TextureShader.vs", "..\\Data\\Shaders\\TextureShader.fs");
 	m_texture->Init("..\\Data\\Textures\\sgbutton.tga", GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);
-	m_Button = std::unique_ptr<Button>(new Button(std::move(m_Shaders),std::move(m_texture)));
+	m_Button = std::unique_ptr<Button>(new Button(std::move(m_Shaders), std::move(m_texture)));
 	m_Button->Set2DPosition(320, 50);
 	m_Button->SetSize(400, 100);
 	m_Button->Init();
@@ -41,41 +41,72 @@ void Application::Init()
 	m_Camera->Init(CameraPos, TargetPos, fFovY, (GLfloat)screenWidth / screenHeight, 1.0f, 5000.0f, 1.0f);
 
 
-	//plan
-	m_model.reset(new Models());
+	//plane
 	m_Shaders.reset(new Shaders());
 	m_texture.reset(new Texture());
 
-	m_model->Init("..\\Data\\Model\\Plan.nfg", NFG);
 	m_Shaders->Init("..\\Data\\Shaders\\ColorShader.vs", "..\\Data\\Shaders\\TextureShader.fs");
-	m_texture->Init("..\\Data\\Textures\\Dirt.tga", GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);
-	m_Plan = std::unique_ptr<Sprite3D>(new Sprite3D(std::move(m_model), std::move(m_Shaders), m_Camera, std::move(m_texture)));
-	m_Plan->Set3DScale(Vector3(20, 20, 20));
-	m_Plan->Init();
+	m_texture->Init("..\\Data\\Textures\\space.tga", GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);
+	m_Plane = std::unique_ptr<Plane>(new Plane(std::move(m_Shaders), m_Camera, std::move(m_texture)));
+	m_Plane->Set3DScale(Vector3(15, 15, 15));
+	m_Plane->Init();
 
 
-	//box
-	m_model.reset(new Models());
-	m_Shaders.reset(new Shaders());
-	m_texture.reset(new Texture());
-
-	m_model->Init("..\\Data\\Model\\box.nfg", NFG);
-	m_Shaders->Init("..\\Data\\Shaders\\ColorShader.vs", "..\\Data\\Shaders\\ColorShader.fs");
-	m_Sprite3D = std::unique_ptr<Sprite3D>(new Sprite3D(std::move(m_model), std::move(m_Shaders), m_Camera, Vector4(0.0, 0.0, 1.0, 0.5)));
-	m_Sprite3D->Set3DScale(Vector3(1, 1, 1));
-	m_Sprite3D->Init();
-
-
-	//sphere
-	m_model.reset(new Models());
+	//Cube
 	m_Shaders.reset(new Shaders());
 	m_texture.reset(new Texture());
 
 	m_Shaders->Init("..\\Data\\Shaders\\TextureShader.vs", "..\\Data\\Shaders\\TextureShader.fs");
-	m_texture->Init("..\\Data\\Textures\\Rock.tga", GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);
-	m_Sphere = std::unique_ptr<Sphere>(new Sphere(std::move(m_Shaders), m_Camera, std::move(m_texture)) );
-	m_Sphere->Init();
-	m_Sphere->Set3DScale(Vector3(0.1, 0.1, 0.1));
+	m_texture->Init("..\\Data\\Textures\\rmarble.tga", GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);
+	m_Cube = std::unique_ptr<Cube>(new Cube(std::move(m_Shaders), m_Camera, std::move(m_texture)));
+	m_Cube->Set3DScale(Vector3(3, 3, 3));
+	m_Cube->Init();
+	m_Cube->Set3DPosition(Vector3(1, 10, 1));
+
+
+	//sphere1
+	m_Shaders.reset(new Shaders());
+	m_texture.reset(new Texture());
+
+	m_Shaders->Init("..\\Data\\Shaders\\TextureShader.vs", "..\\Data\\Shaders\\TextureShader.fs");
+	m_texture->Init("..\\Data\\Textures\\mercury.tga", GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);
+	m_Sphere1 = std::unique_ptr<Sphere>(new Sphere(std::move(m_Shaders), m_Camera, std::move(m_texture)));
+	m_Sphere1->Init();
+	m_Sphere1->Set3DScale(Vector3(0.03, 0.03, 0.03));
+	m_Sphere1->Set3DPosition(Vector3(-20, -10, 0));
+
+	//sphere2
+	m_Shaders.reset(new Shaders());
+	m_texture.reset(new Texture());
+
+	m_Shaders->Init("..\\Data\\Shaders\\TextureShader.vs", "..\\Data\\Shaders\\TextureShader.fs");
+	m_texture->Init("..\\Data\\Textures\\venus.tga", GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);
+	m_Sphere2 = std::unique_ptr<Sphere>(new Sphere(std::move(m_Shaders), m_Camera, std::move(m_texture)));
+	m_Sphere2->Init();
+	m_Sphere2->Set3DScale(Vector3(0.07, 0.07, 0.07));
+	m_Sphere2->Set3DPosition(Vector3(-10, -10, -0));
+
+	//sphere3
+	m_Shaders.reset(new Shaders());
+	m_texture.reset(new Texture());
+
+	m_Shaders->Init("..\\Data\\Shaders\\TextureShader.vs", "..\\Data\\Shaders\\TextureShader.fs");
+	m_texture->Init("..\\Data\\Textures\\mars.tga", GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);
+	m_Sphere3 = std::unique_ptr<Sphere>(new Sphere(std::move(m_Shaders), m_Camera, std::move(m_texture)));
+	m_Sphere3->Init();
+	m_Sphere3->Set3DScale(Vector3(0.05, 0.05, 0.05));
+	m_Sphere3->Set3DPosition(Vector3(0, -10, 0));
+
+	//sphere4
+	m_Shaders.reset(new Shaders());
+	m_texture.reset(new Texture());
+
+	m_Shaders->Init("..\\Data\\Shaders\\TextureShader.vs", "..\\Data\\Shaders\\TextureShader.fs");
+	m_texture->Init("..\\Data\\Textures\\neptune.tga", GL_CLAMP_TO_EDGE, GL_LINEAR_MIPMAP_LINEAR);
+	m_Sphere4 = std::unique_ptr<Sphere>(new Sphere(std::move(m_Shaders), m_Camera, std::move(m_texture)));
+	m_Sphere4->Init();
+	m_Sphere4->Set3DScale(Vector3(0.09, 0.09, 0.09));
+	m_Sphere4->Set3DPosition(Vector3(10, -10, 0));
 
 }
 
@@ -83,21 +114,27 @@ void Application::Update(GLfloat deltaTime)
 {
 	//update
 	m_Button->Update(deltaTime);
-	m_Plan->Update(deltaTime);
-	m_Sprite3D->Update(deltaTime);
-	m_Sphere->Update(deltaTime);
+	m_Plane->Update(deltaTime);
+	m_Cube->Update(deltaTime);
+	m_Sphere1->Update(deltaTime);
+	m_Sphere2->Update(deltaTime);
+	m_Sphere3->Update(deltaTime);
+	m_Sphere4->Update(deltaTime);
 }
 
 void Application::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	//Draw
-	
+
 	//3D
-	m_Plan->Draw();
-	m_Sprite3D->Draw();
-	m_Sphere->Draw();
-	
+	m_Plane->Draw();
+	m_Cube->Draw();
+	m_Sphere1->Draw();
+	m_Sphere2->Draw();
+	m_Sphere3->Draw();
+	m_Sphere4->Draw();
+
 	//2D
 	m_Button->Draw();
 }
